@@ -8,6 +8,20 @@ import InnerLink from '@/layout/components/InnerLink'
 // 匹配views里面所有的.vue文件
 const modules = import.meta.glob('./../../views/**/*.vue')
 
+// 只保留的业务菜单标题白名单
+const MENU_TITLE_WHITELIST = [
+  '管理员',
+  '学院',
+  '班级',
+  '专业',
+  '学生',
+  '教师',
+  '课程',
+  '选课',
+  '成绩',
+  '授课'
+]
+
 const usePermissionStore = defineStore(
   'permission',
   {
@@ -39,9 +53,15 @@ const usePermissionStore = defineStore(
             const sdata = JSON.parse(JSON.stringify(res.data))
             const rdata = JSON.parse(JSON.stringify(res.data))
             const defaultData = JSON.parse(JSON.stringify(res.data))
-            const sidebarRoutes = filterAsyncRouter(sdata)
-            const rewriteRoutes = filterAsyncRouter(rdata, false, true)
-            const defaultRoutes = filterAsyncRouter(defaultData)
+            let sidebarRoutes = filterAsyncRouter(sdata)
+            let rewriteRoutes = filterAsyncRouter(rdata, false, true)
+            let defaultRoutes = filterAsyncRouter(defaultData)
+
+            // 只保留需要的菜单（根据 meta.title 过滤）
+            sidebarRoutes = filterRoutesByTitle(sidebarRoutes)
+            rewriteRoutes = filterRoutesByTitle(rewriteRoutes)
+            defaultRoutes = filterRoutesByTitle(defaultRoutes)
+
             const asyncRoutes = filterDynamicRoutes(dynamicRoutes)
             asyncRoutes.forEach(route => { router.addRoute(route) })
             this.setRoutes(rewriteRoutes)
@@ -54,6 +74,25 @@ const usePermissionStore = defineStore(
       }
     }
   })
+
+// 根据标题白名单过滤路由树，如果子路由中有需要的菜单，则保留父级
+function filterRoutesByTitle(routes) {
+  if (!Array.isArray(routes)) return []
+  const res = []
+  routes.forEach(route => {
+    const r = { ...route }
+    if (r.children && r.children.length) {
+      r.children = filterRoutesByTitle(r.children)
+    }
+    const hasMetaTitle = r.meta && r.meta.title
+    const inWhitelist = hasMetaTitle && MENU_TITLE_WHITELIST.includes(r.meta.title)
+    const hasChildren = Array.isArray(r.children) && r.children.length > 0
+    if (inWhitelist || hasChildren) {
+      res.push(r)
+    }
+  })
+  return res
+}
 
 // 遍历后台传来的路由字符串，转换为组件对象
 function filterAsyncRouter(asyncRouterMap, lastRouter = false, type = false) {
