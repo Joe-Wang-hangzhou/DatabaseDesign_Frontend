@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// Ö´ÐÐSQLÓï¾ä
+// ??SQL??
 export function executeSql(sql) {
   const data = {
     sql: sql
