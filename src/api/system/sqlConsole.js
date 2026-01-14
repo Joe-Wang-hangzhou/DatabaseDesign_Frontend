@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// ??SQL??
+// 执行SQL语句
 export function executeSql(sql) {
   const data = {
     sql: sql

@@ -3,40 +3,40 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          <span>SQLÓï¾ä¿ØÖÆÌ¨</span>
+          <span>SQLè¯­å¥æ§åˆ¶å°</span>
         </div>
       </template>
       
       <el-form :model="form" label-width="80px">
-        <el-form-item label="SQLÓï¾ä">
+        <el-form-item label="SQLè¯­å¥">
           <el-input
             v-model="form.sql"
             type="textarea"
             :rows="8"
-            placeholder="ÇëÊäÈëSQLÓï¾ä£¬ÀıÈç£ºSELECT * FROM sys_user LIMIT 10"
+            placeholder="è¯·è¾“å…¥SQLè¯­å¥"
             clearable
           />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="Promotion" @click="handleExecute" :loading="loading">
-            Ö´ĞĞSQL
+            æäº¤SQL
           </el-button>
-          <el-button icon="Refresh" @click="handleReset">Çå¿Õ</el-button>
+          <el-button icon="Refresh" @click="handleReset">é‡ç½®</el-button>
         </el-form-item>
       </el-form>
 
       <el-divider />
 
-      <!-- Ö´ĞĞ½á¹û -->
+      <!-- æ‰§è¡Œç»“æœ -->
       <div v-if="resultVisible">
         <div class="result-header">
-          <span class="result-title">Ö´ĞĞ½á¹û</span>
+          <span class="result-title">æ‰§è¡Œç»“æœ</span>
           <el-tag :type="resultType" style="margin-left: 10px">
-            {{ resultType === 'success' ? 'Ö´ĞĞ³É¹¦' : 'Ö´ĞĞÊ§°Ü' }}
+            {{ resultType === 'success' ? 'æ‰§è¡ŒæˆåŠŸ' : 'æ‰§è¡Œå¤±è´¥' }}
           </el-tag>
         </div>
         
-        <!-- ³É¹¦Ê±ÏÔÊ¾±í¸ñ -->
+        <!-- æˆåŠŸæ—¶æ˜¾ç¤ºè¡¨æ ¼ -->
         <div v-if="resultType === 'success' && tableData.length > 0" style="margin-top: 20px">
           <el-table
             :data="tableData"
@@ -56,16 +56,16 @@
             />
           </el-table>
           <div style="margin-top: 10px; color: #909399; font-size: 12px">
-            ¹² {{ tableData.length }} Ìõ¼ÇÂ¼
+            å…± {{ tableData.length }} æ¡è®°å½•
           </div>
         </div>
         
-        <!-- ³É¹¦µ«ÎŞÊı¾İ -->
+        <!-- æˆåŠŸä½†æ— æ•°æ® -->
         <div v-if="resultType === 'success' && tableData.length === 0" style="margin-top: 20px">
-          <el-empty description="SQLÖ´ĞĞ³É¹¦£¬µ«Î´·µ»ØÊı¾İ" />
+          <el-empty description="SQLæ‰§è¡ŒæˆåŠŸï¼Œä½†æœªè¿”å›æ•°æ®" />
         </div>
         
-        <!-- Ê§°ÜÊ±ÏÔÊ¾´íÎóĞÅÏ¢ -->
+        <!-- å¤±è´¥æ—¶æ˜¾ç¤ºé”™è¯¯ä¿¡æ¯ -->
         <div v-if="resultType === 'error'" style="margin-top: 20px">
           <el-alert
             :title="errorMessage"
@@ -95,10 +95,10 @@ const errorMessage = ref('')
 const tableData = ref([])
 const tableColumns = ref([])
 
-// Ö´ĞĞSQL
+// æ‰§è¡ŒSQL
 const handleExecute = () => {
   if (!form.sql || !form.sql.trim()) {
-    ElMessage.warning('ÇëÊäÈëSQLÓï¾ä')
+    ElMessage.warning('è¯·è¾“å…¥SQLè¯­å¥')
     return
   }
   
@@ -113,10 +113,10 @@ const handleExecute = () => {
       if (response.code === 200) {
         resultType.value = 'success'
         
-        // ´¦Àí·µ»ØµÄÊı¾İ
+        // å¤„ç†è¿”å›çš„æ•°æ®
         if (response.data) {
           if (Array.isArray(response.data)) {
-            // Èç¹ûÊÇÊı×é£¬Ö±½ÓÊ¹ÓÃ
+            // å¦‚æœæ˜¯æ•°ç»„ï¼Œç›´æ¥ä½¿ç”¨
             if (response.data.length > 0) {
               tableColumns.value = Object.keys(response.data[0])
               tableData.value = response.data
@@ -125,7 +125,7 @@ const handleExecute = () => {
               tableColumns.value = []
             }
           } else if (response.data.rows && Array.isArray(response.data.rows)) {
-            // Èç¹ûÊı¾İÔÚrows×Ö¶ÎÖĞ
+            // å¦‚æœæ•°æ®åœ¨rowså­—æ®µä¸­
             if (response.data.rows.length > 0) {
               tableColumns.value = Object.keys(response.data.rows[0])
               tableData.value = response.data.rows
@@ -134,11 +134,11 @@ const handleExecute = () => {
               tableColumns.value = []
             }
           } else if (response.data.columns && response.data.data) {
-            // Èç¹ûºó¶Ë·µ»ØÁËcolumnsºÍdata·ÖÀëµÄ½á¹¹
+            // å¦‚æœåç«¯è¿”å›äº†columnså’Œdataåˆ†ç¦»çš„ç»“æ„
             tableColumns.value = response.data.columns
             tableData.value = response.data.data
           } else {
-            // ³¢ÊÔ½«¶ÔÏó×ª»»ÎªÊı×é
+            // å°è¯•å°†å¯¹è±¡è½¬æ¢ä¸ºæ•°ç»„
             tableColumns.value = Object.keys(response.data)
             tableData.value = [response.data]
           }
@@ -148,20 +148,20 @@ const handleExecute = () => {
         }
       } else {
         resultType.value = 'error'
-        errorMessage.value = response.msg || 'Ö´ĞĞÊ§°Ü'
+        errorMessage.value = response.msg || 'æ‰§è¡Œå¤±è´¥'
       }
     })
     .catch(error => {
       loading.value = false
       resultVisible.value = true
       resultType.value = 'error'
-      errorMessage.value = error.msg || error.message || 'SQLÖ´ĞĞÊ§°Ü£¬Çë¼ì²éSQLÓï¾äÊÇ·ñÕıÈ·'
+      errorMessage.value = error.msg || error.message || 'SQLæ‰§è¡Œå¤±è´¥ï¼Œè¯·æ£€æŸ¥SQLè¯­å¥æ˜¯å¦æ­£ç¡®'
       tableData.value = []
       tableColumns.value = []
     })
 }
 
-// Çå¿Õ
+// æ¸…ç©º
 const handleReset = () => {
   form.sql = ''
   resultVisible.value = false
