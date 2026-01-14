@@ -62,6 +62,12 @@ export const constantRoutes = [
         component: () => import('@/views/index'),
         name: 'Index',
         meta: { title: '首页', icon: 'dashboard', affix: true }
+      },
+      {
+        path: '/system/sqlConsole',
+        component: () => import('@/views/system/sqlConsole/index'),
+        name: 'SqlConsole',
+        meta: { title: 'SQL语句控制台', icon: 'code' }
       }
     ]
   }
