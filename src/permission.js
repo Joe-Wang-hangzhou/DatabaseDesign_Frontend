@@ -1,7 +1,6 @@
 import router from './router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import useSettingsStore from '@/store/modules/settings'
 import usePermissionStore from '@/store/modules/permission'
 import { constantRoutes } from './router'
 
@@ -28,11 +27,7 @@ router.beforeEach((to, from, next) => {
       isInitialized = true
     }
     
-    try {
-      to.meta.title && useSettingsStore().setTitle(to.meta.title)
-    } catch (e) {
-      console.warn('Settings store access failed:', e)
-    }
+    // 不再动态更新标题，使用 index.html 中的固定标题
   } catch (e) {
     console.error('Route guard error:', e)
   }
