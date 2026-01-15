@@ -7,9 +7,6 @@
   >
     <template v-for="(item, index) in topMenus">
       <el-menu-item :style="{'--theme': theme}" :index="item.path" :key="index" v-if="index < visibleNumber">
-        <svg-icon
-        v-if="item.meta && item.meta.icon && item.meta.icon !== '#'"
-        :icon-class="item.meta.icon"/>
         {{ item.meta.title }}
       </el-menu-item>
     </template>
@@ -22,9 +19,6 @@
           :index="item.path"
           :key="index"
           v-if="index >= visibleNumber">
-        <svg-icon
-          v-if="item.meta && item.meta.icon && item.meta.icon !== '#'"
-          :icon-class="item.meta.icon"/>
         {{ item.meta.title }}
         </el-menu-item>
       </template>
