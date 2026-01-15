@@ -68,6 +68,126 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/system/adminofSc',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/adminofSc/index'),
+        name: 'AdminofSc',
+        meta: { title: '管理员', icon: 'user' }
+      }
+    ]
+  },
+  {
+    path: '/system/collegeofSc',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/collegeofSc/index'),
+        name: 'CollegeofSc',
+        meta: { title: '学院', icon: 'education' }
+      }
+    ]
+  },
+  {
+    path: '/system/classofSc',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/classofSc/index'),
+        name: 'ClassofSc',
+        meta: { title: '班级', icon: 'peoples' }
+      }
+    ]
+  },
+  {
+    path: '/system/majorofSc',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/majorofSc/index'),
+        name: 'MajorofSc',
+        meta: { title: '专业', icon: 'skill' }
+      }
+    ]
+  },
+  {
+    path: '/system/studentofSc',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/studentofSc/index'),
+        name: 'StudentofSc',
+        meta: { title: '学生', icon: 'peoples' }
+      }
+    ]
+  },
+  {
+    path: '/system/teacherofSc',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/teacherofSc/index'),
+        name: 'TeacherofSc',
+        meta: { title: '教师', icon: 'user' }
+      }
+    ]
+  },
+  {
+    path: '/system/courseofSc',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/courseofSc/index'),
+        name: 'CourseofSc',
+        meta: { title: '课程', icon: 'education' }
+      }
+    ]
+  },
+  {
+    path: '/system/enrollmentofSc',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/enrollmentofSc/index'),
+        name: 'EnrollmentofSc',
+        meta: { title: '选课', icon: 'list' }
+      }
+    ]
+  },
+  {
+    path: '/system/scoreofSC',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/scoreofSC/index'),
+        name: 'ScoreofSC',
+        meta: { title: '成绩', icon: 'chart' }
+      }
+    ]
+  },
+  {
+    path: '/system/teachingofSc',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/teachingofSc/index'),
+        name: 'TeachingofSc',
+        meta: { title: '授课', icon: 'education' }
+      }
+    ]
+  },
+  {
     path: "/:pathMatch(.*)*",
     component: () => import('@/views/error/404'),
     hidden: true
