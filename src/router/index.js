@@ -38,27 +38,17 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/login',
-    component: () => import('@/views/login'),
-    hidden: true
-  },
-  {
-    path: "/:pathMatch(.*)*",
-    component: () => import('@/views/error/404'),
-    hidden: true
-  },
-  {
     path: '/401',
     component: () => import('@/views/error/401'),
     hidden: true
   },
   {
-    path: '',
+    path: '/',
     component: Layout,
     redirect: '/index',
     children: [
       {
-        path: '/index',
+        path: 'index',
         component: () => import('@/views/index'),
         name: 'Index',
         meta: { title: '首页', icon: 'dashboard', affix: true }
@@ -76,6 +66,11 @@ export const constantRoutes = [
         meta: { title: 'SQL语句控制台', icon: 'code' }
       }
     ]
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import('@/views/error/404'),
+    hidden: true
   }
 ]
 

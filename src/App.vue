@@ -10,6 +10,10 @@ onMounted(() => {
   nextTick(() => {
     // 初始化主题样式
     handleThemeStyle(useSettingsStore().theme)
+    // 隐藏加载动画
+    if (document.body) {
+      document.body.classList.add('loaded')
+    }
   })
 })
 </script>

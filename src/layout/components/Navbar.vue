@@ -5,42 +5,22 @@
     <top-nav id="topmenu-container" class="topmenu-container" v-if="settingsStore.topNav" />
 
     <div class="right-menu">
-      <div class="logout-container">
-        <el-button type="text" class="right-menu-item hover-effect logout-btn" @click="logout">
-          退出登录
-        </el-button>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ElMessageBox } from 'element-plus'
 import Breadcrumb from '@/components/Breadcrumb'
 import TopNav from '@/components/TopNav'
 import Hamburger from '@/components/Hamburger'
 import useAppStore from '@/store/modules/app'
-import useUserStore from '@/store/modules/user'
 import useSettingsStore from '@/store/modules/settings'
 
 const appStore = useAppStore()
-const userStore = useUserStore()
 const settingsStore = useSettingsStore()
 
 function toggleSideBar() {
   appStore.toggleSideBar()
-}
-
-function logout() {
-  ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning'
-  }).then(() => {
-    userStore.logOut().then(() => {
-      location.href = '/index';
-    })
-  }).catch(() => { });
 }
 </script>
 
