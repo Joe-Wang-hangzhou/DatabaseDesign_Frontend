@@ -1,5 +1,5 @@
 {
-  "name": "ruoyi",
+  "name": "ScoreSystem",
   "version": "3.8.7",
   "description": "学生成绩管理系统",
   "author": "wch",
@@ -10,10 +10,6 @@
     "build:prod": "vite build",
     "build:stage": "vite build --mode staging",
     "preview": "vite preview"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://gitee.com/y_project/RuoYi-Vue.git"
   },
   "dependencies": {
     "@element-plus/icons-vue": "2.3.1",

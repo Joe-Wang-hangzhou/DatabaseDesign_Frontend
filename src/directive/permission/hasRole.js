@@ -1,6 +1,5 @@
  /**
  * v-hasRole 角色权限处理
- * Copyright (c) 2019 ruoyi
  * 已移除权限校验，始终显示按钮
  */
 
