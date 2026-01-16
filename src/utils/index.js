@@ -1,4 +1,4 @@
-import { parseTime } from './ruoyi'
+import { parseTime } from './general.js'
 
 /**
  * 表格时间格式化
