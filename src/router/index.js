@@ -68,18 +68,6 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/system/adminofSc',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/system/adminofSc/index'),
-        name: 'AdminofSc',
-        meta: { title: '管理员', icon: 'user' }
-      }
-    ]
-  },
-  {
     path: '/system/collegeofSc',
     component: Layout,
     children: [
